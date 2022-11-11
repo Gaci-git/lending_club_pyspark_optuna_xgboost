@@ -4,7 +4,7 @@ import pandas as pd
 import sklearn
 
 model = xgb.XGBClassifier()
-model.load_model('xgb_model-2.json')
+model.load_model('xgb_model.json')
 
 #Caching the model for faster loading
 @st.cache
