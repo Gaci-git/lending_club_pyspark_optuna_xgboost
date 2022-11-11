@@ -22,8 +22,6 @@ def predict(loan_amnt, term, installment, grade,
     elif term == '60 months':
         term = 1
 
-        
-    {'A': 1, 'B': 2, 'C': 3, 'D': 4, 'E': 5, 'F': 6, 'G': 7}
     
     if grade == 'A':
         grade = 1
