@@ -170,7 +170,7 @@ initial_list_status = st.selectbox('Inital List Status:', ['W', 'F'])
 
 application_type = st.selectbox('Inital Listing Status:', ['Individual', 'Joint Application'])
 
-mort_acc = st.number_input('DTI:', min_value=0.1, max_value=10000000000000.0, value=1.0)
+mort_acc = st.number_input('Number of mortgage accounts:', min_value=0.1, max_value=10000000000000.0, value=1.0)
 pub_rec_bankruptcies = st.number_input('Reported Bankruptcies:', min_value=0.1, max_value=10000000000000.0, value=1.0)
 cr_line = st.number_input('For many years Credit Line was open:', min_value=0.1, max_value=10000000000000.0, value=1.0)
 
