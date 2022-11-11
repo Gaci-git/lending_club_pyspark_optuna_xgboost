@@ -1,6 +1,3 @@
-['int_rate', 'installment', 'total_acc', 'pub_rec'])
-
-
 import xgboost as xgb
 import streamlit as st
 import pandas as pd
