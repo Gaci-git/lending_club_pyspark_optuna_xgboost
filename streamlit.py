@@ -15,7 +15,7 @@ def predict(loan_amnt, term, installment, grade,
             verification_status, purpose, dti, open_acc, 
             pub_rec, revol_bal, revol_util, total_acc, 
             initial_list_status, application_type,
-            mort_acc, pub_rec_bankruptcies, cr_line):
+            mort_acc, pub_rec_bankruptcies, time_paid_back, cr_line):
   
     if term == '36 months':
         term = 0
@@ -121,13 +121,13 @@ def predict(loan_amnt, term, installment, grade,
                                               verification_status, purpose, dti, open_acc, 
                                               pub_rec, revol_bal, revol_util, total_acc, 
                                               initial_list_status, application_type,
-                                              mort_acc, pub_rec_bankruptcies, cr_line]], 
+                                              mort_acc, pub_rec_bankruptcies, time_paid_back cr_line]], 
             columns=['loan_amnt', 'term', 'installment', 'grade', 
                       'emp_length', 'home_ownership', 'annual_inc', 
                       'verification_status', 'purpose', 'dti, open_acc', 
                       'pub_rec, revol_bal', 'revol_util', 'total_acc', 
                       'initial_list_status', 'application_type',
-                      'mort_acc', 'pub_rec_bankruptcies', 'cr_line']))
+                      'mort_acc', 'pub_rec_bankruptcies', 'time_paid_back', 'cr_line']))
     return prediction
   
   
@@ -180,6 +180,7 @@ application_type = st.selectbox('Inital Listing Status:', ['Individual', 'Joint 
 
 mort_acc = st.number_input('Number of mortgage accounts:', min_value=0.1, max_value=10000000000000.0, value=1.0)
 pub_rec_bankruptcies = st.number_input('Reported Bankruptcies:', min_value=0.1, max_value=10000000000000.0, value=1.0)
+time_paid_back = st.number_input('How long customer will take to repay:', min_value=0.1, max_value=10000000000000.0, value=1.0)
 cr_line = st.number_input('For many years Credit Line was open:', min_value=0.1, max_value=10000000000000.0, value=1.0)
 
 
@@ -189,6 +190,6 @@ if st.button('Predict Price'):
                     verification_status, purpose, dti, open_acc, 
                     pub_rec, revol_bal, revol_util, total_acc, 
                     initial_list_status, application_type,
-                    mort_acc, pub_rec_bankruptcies, cr_line)
+                    mort_acc, pub_rec_bankruptcies, time_paid_back, cr_line)
     
     st.success(f'The predicted outcome of the loan is ${outcome}')
