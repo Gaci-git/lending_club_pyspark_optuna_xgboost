@@ -161,10 +161,10 @@ purpose = st.selectbox('Verification Status:', ['debt consolidation',
                                                 'wedding'])
 
 dti = st.number_input('DTI:', min_value=0.1, max_value=10000000000000.0, value=1.0)
-open_acc = st.number_input('DTI:', min_value=0.1, max_value=10000000000000.0, value=1.0)
-pub_rec = st.number_input('DTI:', min_value=0.1, max_value=10000000000000.0, value=1.0)
-revol_bal = st.number_input('DTI:', min_value=0.1, max_value=10000000000000.0, value=1.0)
-total_acc = st.number_input('DTI:', min_value=0.1, max_value=10000000000000.0, value=1.0)
+open_acc = st.number_input('How many accounts are open:', min_value=0.1, max_value=10000000000000.0, value=1.0)
+pub_rec = st.number_input('Count of public records:', min_value=0.1, max_value=10000000000000.0, value=1.0)
+revol_bal = st.number_input('Total credit revolving balance:', min_value=0.1, max_value=10000000000000.0, value=1.0)
+total_acc = st.number_input('Total number of credit lines currently open:', min_value=0.1, max_value=10000000000000.0, value=1.0)
 
 initial_list_status = st.selectbox('Inital List Status:', ['W', 'F'])
 
