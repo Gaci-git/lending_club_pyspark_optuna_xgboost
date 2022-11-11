@@ -102,7 +102,7 @@ def predict(loan_amnt, term, installment, grade,
 
     if application_type == 'Individual':
         application_type = 0
-    elif application_type == 'Joint Application:
+    elif application_type == 'Joint Application':
         application_type = 1
 
     if initial_list_status == 'W':
