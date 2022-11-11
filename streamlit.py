@@ -37,6 +37,31 @@ def predict(loan_amnt, term, grade, home_ownership, annual_inc,
     elif grade == 'G':
         grade = 7
 
+
+
+    if emp_length == 'less than 1 year':
+         emp_length = 0
+    elif emp_length == '1 year':
+         emp_length = 1
+    elif emp_length == '2 years':
+         emp_length = 2
+    elif emp_length == '3 years':
+         emp_length = 3
+    elif emp_length == '4 years':
+         emp_length = 4
+    elif emp_length == '5 years':
+         emp_length = 5
+    elif emp_length == '6 years':
+         emp_length = 6
+    elif emp_length == '7 years':
+         emp_length = 7
+    elif emp_length == '8 years':
+         emp_length = 8
+    elif emp_length == '9 years':
+         emp_length = 9
+    elif emp_length == '10 years or more':
+         emp_length = 10
+
     if home_ownership == 'Own':
         home_ownership = 0
     elif home_ownership == 'Mortgage':
