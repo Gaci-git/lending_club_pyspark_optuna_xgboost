@@ -1,6 +1,7 @@
 import xgboost as xgb
 import streamlit as st
 import pandas as pd
+import sklearn
 
 model = xgb.XGBClassifier()
 model.load_model('xgb_model.json')
