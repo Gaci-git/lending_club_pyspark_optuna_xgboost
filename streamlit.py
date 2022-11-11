@@ -7,7 +7,7 @@ model = xgb.XGBClassifier()
 model.load_model('xgb_model.json')
 
 #Caching the model for faster loading
-@st.cache
+@st.cache(suppress_st_warning=True)
 
 # Define the prediction function
 def predict(loan_amnt, term, installment, grade, 
