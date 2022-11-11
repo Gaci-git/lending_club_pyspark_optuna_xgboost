@@ -1,3 +1,6 @@
+['int_rate', 'installment', 'total_acc', 'pub_rec'])
+
+
 import xgboost as xgb
 import streamlit as st
 import pandas as pd
@@ -10,10 +13,10 @@ model.load_model('xgb_model.json')
 @st.cache(suppress_st_warning=True)
 
 # Define the prediction function
-def predict(loan_amnt, term, installment, grade, 
+def predict(loan_amnt, term, grade, 
             emp_length, home_ownership, annual_inc, 
             verification_status, purpose, dti, open_acc, 
-            pub_rec, revol_bal, revol_util, total_acc, 
+            revol_bal, revol_util, 
             initial_list_status, application_type,
             mort_acc, pub_rec_bankruptcies, time_paid_back, cr_line):
   
@@ -114,16 +117,16 @@ def predict(loan_amnt, term, installment, grade,
         initial_list_status = 1
     
 
-    prediction = model.predict(pd.DataFrame([[loan_amnt, term, installment, grade, 
+    prediction = model.predict(pd.DataFrame([[loan_amnt, term, grade, 
                                               emp_length, home_ownership, annual_inc, 
                                               verification_status, purpose, dti, open_acc, 
-                                              pub_rec, revol_bal, revol_util, total_acc, 
+                                              revol_bal, revol_util,
                                               initial_list_status, application_type,
                                               mort_acc, pub_rec_bankruptcies, time_paid_back, cr_line]], 
-            columns=['loan_amnt', 'term', 'installment', 'grade', 
+            columns=['loan_amnt', 'term', 'grade', 
                       'emp_length', 'home_ownership', 'annual_inc', 
                       'verification_status', 'purpose', 'dti, open_acc', 
-                      'pub_rec, revol_bal', 'revol_util', 'total_acc', 
+                      'revol_bal', 'revol_util', 
                       'initial_list_status', 'application_type',
                       'mort_acc', 'pub_rec_bankruptcies', 'time_paid_back', 'cr_line']))
     return prediction
@@ -135,7 +138,6 @@ st.header('Fill your request:')
 
 loan_amnt = st.number_input('Loan amount:', min_value=0.1, max_value=100000000000000.0, value=1.0)
 term = st.selectbox('Term:', ['36 months', '60 months'])
-installment = st.number_input('Installment:', min_value=0.1, max_value=100000000000000.0, value=1.0)
 grade = st.selectbox('Grade Rating:', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
 
 emp_length = st.selectbox('Employment Lenght:', ['less than 1 year', '1 year', 
@@ -167,10 +169,8 @@ purpose = st.selectbox('Verification Status:', ['debt consolidation',
 
 dti = st.number_input('DTI:', min_value=0.1, max_value=10000000000000.0, value=1.0)
 open_acc = st.number_input('How many accounts are open:', min_value=0.1, max_value=10000000000000.0, value=1.0)
-pub_rec = st.number_input('Count of public records:', min_value=0.1, max_value=10000000000000.0, value=1.0)
 revol_bal = st.number_input('Total credit revolving balance:', min_value=0.1, max_value=10000000000000.0, value=1.0)
 revol_util = st.number_input('Revolving line utilization rate', min_value=0.1, max_value=10000000000000.0, value=1.0)
-total_acc = st.number_input('Total number of credit lines currently open:', min_value=0.1, max_value=10000000000000.0, value=1.0)
 
 initial_list_status = st.selectbox('Inital List Status:', ['W', 'F'])
 
@@ -183,10 +183,10 @@ cr_line = st.number_input('For many years Credit Line was open:', min_value=0.1,
 
 
 if st.button('Predict Price'):
-    outcome = predict(loan_amnt, term, installment, grade, 
+    outcome = predict(loan_amnt, term, grade, 
                     emp_length, home_ownership, annual_inc, 
                     verification_status, purpose, dti, open_acc, 
-                    pub_rec, revol_bal, revol_util, total_acc, 
+                    revol_bal, revol_util,
                     initial_list_status, application_type,
                     mort_acc, pub_rec_bankruptcies, time_paid_back, cr_line)
     
