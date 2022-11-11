@@ -100,6 +100,10 @@ def predict(loan_amnt, term, installment, grade,
         purpose = 9
     elif purpose == 'wedding':
         purpose = 10
+    elif purpose == 'medical':
+        purpose = 11
+    elif purpose == 'small business':
+        purpose = 12
 
     if application_type == 'Individual':
         application_type = 0
@@ -159,7 +163,9 @@ purpose = st.selectbox('Verification Status:', ['debt consolidation',
                                                 'moving',
                                                 'house',
                                                 'renewable energy',
-                                                'wedding'])
+                                                'wedding',
+                                                'medical',
+                                                'small business'])
 
 dti = st.number_input('DTI:', min_value=0.1, max_value=10000000000000.0, value=1.0)
 open_acc = st.number_input('How many accounts are open:', min_value=0.1, max_value=10000000000000.0, value=1.0)
