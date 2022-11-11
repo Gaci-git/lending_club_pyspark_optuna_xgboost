@@ -138,6 +138,9 @@ loan_amnt = st.number_input('Loan amount:', min_value=0.1, max_value=10000000000
 term = st.selectbox('Term:', ['36 months', '60 months'])
 grade = st.selectbox('Grade Rating:', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
 
+emp_length = st.selectbox('Employment Length:', ['less than 1 year', '1 year', '2 years', '3 years', '4 years', '5 years', '6 years', '7 years', '8 years', '9 years', '10 years or more'])
+
+
 home_ownership = st.selectbox('Home Ownerhip:', ['Rent', 'Own', 'Mortgage'])
 
 annual_inc = st.number_input('Annual Income:', min_value=0.1, max_value=10000000000000.0, value=1.0)
