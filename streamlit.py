@@ -10,8 +10,7 @@ model.load_model('xgb_model.json')
 @st.cache(suppress_st_warning=True)
 
 # Define the prediction function
-def predict(loan_amnt, term, grade, 
-            emp_length, home_ownership, annual_inc, 
+def predict(loan_amnt, term, grade, home_ownership, annual_inc, 
             verification_status, purpose, dti, open_acc, 
             revol_bal, revol_util, 
             initial_list_status, application_type,
@@ -37,29 +36,6 @@ def predict(loan_amnt, term, grade,
         grade = 6
     elif grade == 'G':
         grade = 7
-
-    if emp_length == 'less than 1 year':
-        emp_length = 0
-    elif emp_length == '1 year':
-        emp_length = 1
-    elif emp_length == '2 years':
-        emp_length = 2
-    elif emp_length == '3 years':
-        emp_length = 3
-    elif emp_length == '4 years':
-        emp_length = 4
-    elif emp_length == '5 years':
-        emp_length = 5
-    elif emp_length == '6 years':
-        emp_length = 6
-    elif emp_length == '7 years':
-        emp_length = 7
-    elif emp_length == '8 years':
-        emp_length = 8
-    elif emp_length == '9 years':
-        emp_length = 9
-    elif emp_length == '10 years or more':
-        emp_length = 10
 
     if home_ownership == 'Own':
         home_ownership = 0
@@ -115,13 +91,13 @@ def predict(loan_amnt, term, grade,
     
 
     prediction = model.predict(pd.DataFrame([[loan_amnt, term, grade, 
-                                              emp_length, home_ownership, annual_inc, 
+                                              home_ownership, annual_inc, 
                                               verification_status, purpose, dti, open_acc, 
                                               revol_bal, revol_util,
                                               initial_list_status, application_type,
                                               mort_acc, pub_rec_bankruptcies, time_paid_back, cr_line]], 
             columns=['loan_amnt', 'term', 'grade', 
-                      'emp_length', 'home_ownership', 'annual_inc', 
+                      'home_ownership', 'annual_inc', 
                       'verification_status', 'purpose', 'dti, open_acc', 
                       'revol_bal', 'revol_util', 
                       'initial_list_status', 'application_type',
@@ -136,8 +112,6 @@ st.header('Fill your request:')
 loan_amnt = st.number_input('Loan amount:', min_value=0.1, max_value=100000000000000.0, value=1.0)
 term = st.selectbox('Term:', ['36 months', '60 months'])
 grade = st.selectbox('Grade Rating:', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
-
-emp_length = st.selectbox('Employment Length:', ['less than 1 year', '1 year', '2 years', '3 years', '4 years', '5 years', '6 years', '7 years', '8 years', '9 years', '10 years or more'])
 
 home_ownership = st.selectbox('Home Ownerhip:', ['Rent', 'Own', 'Mortgage'])
 
@@ -178,7 +152,7 @@ cr_line = st.number_input('For many years Credit Line was open:', min_value=0.1,
 
 if st.button('Predict Price'):
     outcome = predict(loan_amnt, term, grade, 
-                    emp_length, home_ownership, annual_inc, 
+                    home_ownership, annual_inc, 
                     verification_status, purpose, dti, open_acc, 
                     revol_bal, revol_util,
                     initial_list_status, application_type,
