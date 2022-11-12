@@ -135,7 +135,7 @@ if st.button('Predict Outcome'):
     outcome = predict(loan_amnt, term, grade, home_ownership, annual_inc,
                       verification_status,
                       #purpose, dti, open_acc)
-                      revol_bal, revol_util, initial_list_status, application_type) 
+                      revol_bal, revol_util, initial_list_status, application_type,
                       mort_acc, pub_rec_bankruptcies, time_paid_back, cr_line)
     
     st.success(f'The predicted outcome of the loan is {outcome}')
