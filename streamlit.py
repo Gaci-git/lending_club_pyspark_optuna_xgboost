@@ -10,9 +10,11 @@ model.load_model('xgb_model.json')
 @st.cache(suppress_st_warning=True)
 
 # Define the prediction function
-def predict(loan_amnt, term, grade, home_ownership, annual_inc,
+def predict(loan_amnt, term, grade, 
+            emp_length,
+            home_ownership, annual_inc,
             verification_status,
-            #purpose, 
+            purpose, 
             dti, 
             open_acc, 
             revol_bal, revol_util, 
@@ -40,6 +42,28 @@ def predict(loan_amnt, term, grade, home_ownership, annual_inc,
     elif grade == 'G':
         grade = 7
 
+    if emp_length == 'less than 1 year':
+         emp_length = 0
+    elif emp_length == '1 year':
+         emp_length = 1
+    elif emp_length == '2 years':
+         emp_length = 2
+    elif emp_length == '3 years':
+         emp_length = 3
+    elif emp_length == '4 years':
+         emp_length = 4
+    elif emp_length == '5 years':
+         emp_length = 5
+    elif emp_length == '6 years':
+         emp_length = 6
+    elif emp_length == '7 years':
+         emp_length = 7
+    elif emp_length == '8 years':
+         emp_length = 8
+    elif emp_length == '9 years':
+         emp_length = 9
+    elif emp_length == '10 years or more':
+         emp_length = 10
 
     if home_ownership == 'Own':
         home_ownership = 0
@@ -48,13 +72,39 @@ def predict(loan_amnt, term, grade, home_ownership, annual_inc,
     elif home_ownership == 'Rent':
         home_ownership = 2
 
-
     if verification_status == 'Source verified':
         verification_status = 0
     elif verification_status == 'Verified':
         verification_status = 1
     elif verification_status == 'Non verified':
         verification_status = 2
+
+    if purpose == 'debt consolidation':
+        purpose = 0
+    elif purpose == 'credit card':
+        purpose = 1
+    elif purpose == 'home improvement':
+        purpose = 2
+    elif purpose == 'other':
+        purpose = 3
+    elif purpose == 'major purchase':
+        purpose = 4
+    elif purpose == 'car':
+        purpose = 5
+    elif purpose == 'vacation':
+        purpose = 6
+    elif purpose == 'moving':
+        purpose = 7
+    elif purpose == 'house':
+        purpose = 8
+    elif purpose == 'renewable energy':
+        purpose = 9
+    elif purpose == 'wedding':
+        purpose = 10
+    elif purpose == 'medical':
+        purpose = 11
+    elif purpose == 'small business':
+        purpose = 12
         
     if application_type == 'Individual':
         application_type = 0
@@ -67,9 +117,11 @@ def predict(loan_amnt, term, grade, home_ownership, annual_inc,
         initial_list_status = 1
           
 
-    prediction = model.predict(pd.DataFrame([[loan_amnt, term, grade, home_ownership, annual_inc,
+    prediction = model.predict(pd.DataFrame([[loan_amnt, term, grade, 
+                                              emp_length,
+                                              home_ownership, annual_inc,
                                               verification_status,
-                                              #purpose, 
+                                              purpose, 
                                               dti, 
                                               open_acc, 
                                               revol_bal, revol_util,
@@ -77,13 +129,14 @@ def predict(loan_amnt, term, grade, home_ownership, annual_inc,
                                               mort_acc, pub_rec_bankruptcies, time_paid_back, cr_line]], 
                                             
             columns=['loan_amnt', 'term', 'grade', 
-                      'home_ownership', 'annual_inc',
-                      'verification_status',
-                     #'purpose',
-                      'dti', 'open_acc', 
-                      'revol_bal', 'revol_util', 
-                      'initial_list_status', 'application_type',
-                      'mort_acc', 'pub_rec_bankruptcies', 'time_paid_back', 'cr_line']))
+                     'emp_length',
+                     'home_ownership', 'annual_inc',
+                     'verification_status',
+                     'purpose',
+                     'dti', 'open_acc', 
+                     'revol_bal', 'revol_util', 
+                     'initial_list_status', 'application_type',
+                     'mort_acc', 'pub_rec_bankruptcies', 'time_paid_back', 'cr_line']))
     return prediction
   
   
@@ -95,7 +148,7 @@ loan_amnt = st.number_input('Loan amount:', min_value=0.1, max_value=10000000000
 term = st.selectbox('Term:', ['36 months', '60 months'])
 grade = st.selectbox('Grade Rating:', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
 
-#emp_length = st.selectbox('Employment Length:', ['less than 1 year', '1 year', '2 years', '3 years', '4 years', '5 years', '6 years', '7 years', '8 years', '9 years', '10 years or more'])
+emp_length = st.selectbox('Employment Length:', ['less than 1 year', '1 year', '2 years', '3 years', '4 years', '5 years', '6 years', '7 years', '8 years', '9 years', '10 years or more'])
 
 
 home_ownership = st.selectbox('Home Ownerhip:', ['Rent', 'Own', 'Mortgage'])
@@ -106,19 +159,19 @@ verification_status = st.selectbox('Verification Status:', ['Verified',
                                                             'Source verified', 
                                                             'Not Verified'])
 
-#purpose = st.selectbox('Verification Status:', ['debt consolidation', 
-                                                #'credit card',
-                                                #'home improvement',
-                                                #'other',
-                                                #'major purchase',
-                                                #'car',
-                                                #'vacation',
-                                                #'moving',
-                                                #'house',
-                                                #'renewable energy',
-                                                #'wedding',
-                                                #'medical',
-                                                #'small business'])
+purpose = st.selectbox('Verification Status:', ['debt consolidation', 
+                                                'credit card',
+                                                'home improvement',
+                                                'other',
+                                                'major purchase',
+                                                'car',
+                                                'vacation',
+                                                'moving',
+                                                'house',
+                                                'renewable energy',
+                                                'wedding',
+                                                'medical',
+                                                'small business'])
                                                 
 
 
@@ -137,9 +190,11 @@ cr_line = st.number_input('For many years Credit Line was open:', min_value=0.1,
 
 
 if st.button('Predict Outcome'):
-    outcome = predict(loan_amnt, term, grade, home_ownership, annual_inc,
+    outcome = predict(loan_amnt, term, grade, 
+                      emp_length,
+                      home_ownership, annual_inc,
                       verification_status,
-                      #purpose, 
+                      purpose, 
                       dti, open_acc,
                       revol_bal, revol_util, initial_list_status, application_type,
                       mort_acc, pub_rec_bankruptcies, time_paid_back, cr_line)
