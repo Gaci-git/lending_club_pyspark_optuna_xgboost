@@ -11,11 +11,11 @@ model.load_model('xgb_model.json')
 
 # Define the prediction function
 def predict(loan_amnt, term, grade, home_ownership, annual_inc,
-            verification_status):
+            verification_status,
             #purpose, dti, open_acc): 
-            #revol_bal, revol_util, 
-            #initial_list_status, application_type):
-            #mort_acc, pub_rec_bankruptcies, time_paid_back, cr_line):
+            revol_bal, revol_util, 
+            initial_list_status, application_type,
+            mort_acc, pub_rec_bankruptcies, time_paid_back, cr_line):
   
     if term == '36 months':
         term = 0
@@ -54,22 +54,31 @@ def predict(loan_amnt, term, grade, home_ownership, annual_inc,
     elif verification_status == 'Non verified':
         verification_status = 2
         
+   if application_type == 'Individual':
+        application_type = 0
+    elif application_type == 'Joint Application':
+        application_type = 1
 
+    if initial_list_status == 'W':
+        initial_list_status = 0
+    elif initial_list_status == 'F':
+        initial_list_status = 1
           
 
     prediction = model.predict(pd.DataFrame([[loan_amnt, term, grade, home_ownership, annual_inc,
-                                              verification_status]],
+                                              verification_status,
                                               #purpose, dti, open_acc]], 
-                                              #revol_bal, revol_util,
-                                              #initial_list_status, application_type]],
-                                              #mort_acc, pub_rec_bankruptcies, time_paid_back, cr_line]], 
+                                              revol_bal, revol_util,
+                                              initial_list_status, application_type,
+                                              mort_acc, pub_rec_bankruptcies, time_paid_back, cr_line]], 
+                                            
             columns=['loan_amnt', 'term', 'grade', 
                       'home_ownership', 'annual_inc',
-                      'verification_status']))
+                      'verification_status',
                      #'purpose', 'dti, open_acc'])) 
-                      #'revol_bal', 'revol_util', 
-                      #'initial_list_status', 'application_type']))
-                      #'mort_acc', 'pub_rec_bankruptcies', 'time_paid_back', 'cr_line']))
+                      'revol_bal', 'revol_util', 
+                      'initial_list_status', 'application_type',
+                      'mort_acc', 'pub_rec_bankruptcies', 'time_paid_back', 'cr_line']))
     return prediction
   
   
@@ -105,26 +114,28 @@ verification_status = st.selectbox('Verification Status:', ['Verified',
                                                 #'wedding',
                                                 #'medical',
                                                 #'small business'])
+                                                
+
 
 #dti = st.number_input('DTI:', min_value=0.1, max_value=10000000000000.0, value=1.0)
 #open_acc = st.number_input('How many accounts are open:', min_value=0.1, max_value=10000000000000.0, value=1.0)
 
-#revol_bal = st.number_input('Total credit revolving balance:', min_value=0.1, max_value=10000000000000.0, value=1.0)
-#revol_util = st.number_input('Revolving line utilization rate', min_value=0.1, max_value=10000000000000.0, value=1.0)
-#initial_list_status = st.selectbox('Inital List Status:', ['W', 'F'])
-#application_type = st.selectbox('Inital Listing Status:', ['Individual', 'Joint Application'])
+revol_bal = st.number_input('Total credit revolving balance:', min_value=0.1, max_value=10000000000000.0, value=1.0)
+revol_util = st.number_input('Revolving line utilization rate', min_value=0.1, max_value=10000000000000.0, value=1.0)
+initial_list_status = st.selectbox('Inital List Status:', ['W', 'F'])
+application_type = st.selectbox('Inital Listing Status:', ['Individual', 'Joint Application'])
 
-#mort_acc = st.number_input('Number of mortgage accounts:', min_value=0.1, max_value=10000000000000.0, value=1.0)
-#pub_rec_bankruptcies = st.number_input('Reported Bankruptcies:', min_value=0.1, max_value=10000000000000.0, value=1.0)
-#time_paid_back = st.number_input('How long customer will take to repay:', min_value=0.1, max_value=10000000000000.0, value=1.0)
-#cr_line = st.number_input('For many years Credit Line was open:', min_value=0.1, max_value=10000000000000.0, value=1.0)
+mort_acc = st.number_input('Number of mortgage accounts:', min_value=0.1, max_value=10000000000000.0, value=1.0)
+pub_rec_bankruptcies = st.number_input('Reported Bankruptcies:', min_value=0.1, max_value=10000000000000.0, value=1.0)
+time_paid_back = st.number_input('How long customer will take to repay:', min_value=0.1, max_value=10000000000000.0, value=1.0)
+cr_line = st.number_input('For many years Credit Line was open:', min_value=0.1, max_value=10000000000000.0, value=1.0)
 
 
 if st.button('Predict Outcome'):
     outcome = predict(loan_amnt, term, grade, home_ownership, annual_inc,
-                      verification_status)
+                      verification_status,
                       #purpose, dti, open_acc)
-                      #revol_bal, revol_util, initial_list_status, application_type) 
-                      #mort_acc, pub_rec_bankruptcies, time_paid_back, cr_line)
+                      revol_bal, revol_util, initial_list_status, application_type) 
+                      mort_acc, pub_rec_bankruptcies, time_paid_back, cr_line)
     
     st.success(f'The predicted outcome of the loan is {outcome}')
