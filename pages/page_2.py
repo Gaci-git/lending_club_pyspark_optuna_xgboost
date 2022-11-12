@@ -4,13 +4,13 @@ import pandas as pd
 import sklearn
 
 model = xgb.XGBClassifier()
-model.load_model('xgb_model_grade_optuna.json')
+model.load_model('xgb_model_optuna.json')
 
 #Caching the model for faster loading
 @st.cache(suppress_st_warning=True)
 
 # Define the prediction function
-def predict(loan_amnt, term,
+def predict(loan_amnt, term, grade, 
             emp_length,
             home_ownership, annual_inc,
             verification_status,
@@ -26,7 +26,21 @@ def predict(loan_amnt, term,
     elif term == '60 months':
         term = 1
 
-  
+    
+    if grade == 'A':
+        grade = 1
+    elif grade == 'B':
+        grade = 2
+    elif grade == 'C':
+        grade = 3
+    elif grade == 'D':
+        grade = 4
+    elif grade == 'E':
+        grade = 5
+    elif grade == 'F':
+        grade = 6
+    elif grade == 'G':
+        grade = 7
 
     if emp_length == 'less than 1 year':
          emp_length = 0
@@ -103,7 +117,7 @@ def predict(loan_amnt, term,
         initial_list_status = 1
           
 
-    prediction = model.predict(pd.DataFrame([[loan_amnt, term,  
+    prediction = model.predict(pd.DataFrame([[loan_amnt, term, grade, 
                                               emp_length,
                                               home_ownership, annual_inc,
                                               verification_status,
@@ -114,7 +128,7 @@ def predict(loan_amnt, term,
                                               initial_list_status, application_type,
                                               mort_acc, pub_rec_bankruptcies, time_paid_back, cr_line]], 
                                             
-            columns=['loan_amnt', 'term',
+            columns=['loan_amnt', 'term', 'grade', 
                      'emp_length',
                      'home_ownership', 'annual_inc',
                      'verification_status',
@@ -132,6 +146,7 @@ st.header('Fill your request:')
 
 loan_amnt = st.number_input('Loan amount:', min_value=0.1, max_value=100000000000000.0, value=1.0)
 term = st.selectbox('Term:', ['36 months', '60 months'])
+grade = st.selectbox('Grade Rating:', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
 
 emp_length = st.selectbox('Employment Length:', ['less than 1 year', '1 year', '2 years', '3 years', '4 years', '5 years', '6 years', '7 years', '8 years', '9 years', '10 years or more'])
 
@@ -175,7 +190,7 @@ cr_line = st.number_input('For many years Credit Line was open:', min_value=0.1,
 
 
 if st.button('Predict Outcome'):
-    outcome = predict(loan_amnt, term,  
+    outcome = predict(loan_amnt, term, grade, 
                       emp_length,
                       home_ownership, annual_inc,
                       verification_status,
@@ -184,4 +199,4 @@ if st.button('Predict Outcome'):
                       revol_bal, revol_util, initial_list_status, application_type,
                       mort_acc, pub_rec_bankruptcies, time_paid_back, cr_line)
     
-    st.success(f'The predicted grade of the loan is {outcome}')
+    st.success(f'The predicted outcome of the loan is {outcome}')
