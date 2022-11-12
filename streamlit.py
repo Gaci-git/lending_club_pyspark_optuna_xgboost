@@ -115,13 +115,13 @@ def predict(loan_amnt, term, grade, home_ownership, annual_inc):
         initial_list_status = 1
     
 
-    prediction = model.predict(pd.DataFrame([[loan_amnt, term, grade, home_ownership, annual_inc]]) 
+    prediction = model.predict(pd.DataFrame([[loan_amnt, term, grade, home_ownership, annual_inc]]
                                               #verification_status, purpose, dti, open_acc, 
                                               #revol_bal, revol_util,
                                               #initial_list_status, application_type,
                                               #mort_acc, pub_rec_bankruptcies, time_paid_back, cr_line]], 
             columns=['loan_amnt', 'term', 'grade', 
-                      'home_ownership', 'annual_inc')
+                      'home_ownership', 'annual_inc']))
                       #'verification_status', 'purpose', 'dti, open_acc', 
                       #'revol_bal', 'revol_util', 
                       #'initial_list_status', 'application_type',
