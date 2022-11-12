@@ -4,7 +4,7 @@ import pandas as pd
 import sklearn
 
 model = xgb.XGBClassifier()
-model.load_model('xgb_model_grade_optuna.json')
+model.load_model('xgb_model_sub_grade_optuna.json')
 
 #Caching the model for faster loading
 @st.cache(suppress_st_warning=True)
