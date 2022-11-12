@@ -62,7 +62,7 @@ def predict(loan_amnt, term,
         verification_status = 0
     elif verification_status == 'Verified':
         verification_status = 1
-    elif verification_status == 'Non verified':
+    elif verification_status == 'Not verified':
         verification_status = 2
 
     if purpose == 'debt consolidation':
@@ -142,7 +142,7 @@ annual_inc = st.number_input('Annual Income:', min_value=0.1, max_value=10000000
 
 verification_status = st.selectbox('Verification Status:', ['Verified', 
                                                             'Source verified', 
-                                                            'Not Verified'])
+                                                            'Not verified'])
 
 purpose = st.selectbox('Verification Status:', ['debt consolidation', 
                                                 'credit card',
