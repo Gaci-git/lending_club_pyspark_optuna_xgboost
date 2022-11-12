@@ -38,82 +38,13 @@ def predict(loan_amnt, term, grade, home_ownership, annual_inc):
         grade = 7
 
 
-
-    if emp_length == 'less than 1 year':
-         emp_length = 0
-    elif emp_length == '1 year':
-         emp_length = 1
-    elif emp_length == '2 years':
-         emp_length = 2
-    elif emp_length == '3 years':
-         emp_length = 3
-    elif emp_length == '4 years':
-         emp_length = 4
-    elif emp_length == '5 years':
-         emp_length = 5
-    elif emp_length == '6 years':
-         emp_length = 6
-    elif emp_length == '7 years':
-         emp_length = 7
-    elif emp_length == '8 years':
-         emp_length = 8
-    elif emp_length == '9 years':
-         emp_length = 9
-    elif emp_length == '10 years or more':
-         emp_length = 10
-
     if home_ownership == 'Own':
         home_ownership = 0
     elif home_ownership == 'Mortgage':
         home_ownership = 1
     elif home_ownership == 'Rent':
         home_ownership = 2
-        
-    if verification_status == 'Source verified':
-        verification_status = 0
-    elif verification_status == 'Verified':
-        verification_status = 1
-    elif verification_status == 'Non verified':
-        verification_status = 2
-        
-        
-    if purpose == 'debt consolidation':
-        purpose = 0
-    elif purpose == 'credit card':
-        purpose = 1
-    elif purpose == 'home improvement':
-        purpose = 2
-    elif purpose == 'other':
-        purpose = 3
-    elif purpose == 'major purchase':
-        purpose = 4
-    elif purpose == 'car':
-        purpose = 5
-    elif purpose == 'vacation':
-        purpose = 6
-    elif purpose == 'moving':
-        purpose = 7
-    elif purpose == 'house':
-        purpose = 8
-    elif purpose == 'renewable energy':
-        purpose = 9
-    elif purpose == 'wedding':
-        purpose = 10
-    elif purpose == 'medical':
-        purpose = 11
-    elif purpose == 'small business':
-        purpose = 12
-
-    if application_type == 'Individual':
-        application_type = 0
-    elif application_type == 'Joint Application':
-        application_type = 1
-
-    if initial_list_status == 'W':
-        initial_list_status = 0
-    elif initial_list_status == 'F':
-        initial_list_status = 1
-    
+          
 
     prediction = model.predict(pd.DataFrame([[loan_amnt, term, grade, home_ownership, annual_inc]],
                                               #verification_status, purpose, dti, open_acc, 
