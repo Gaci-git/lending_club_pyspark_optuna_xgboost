@@ -11,7 +11,8 @@ model.load_model('xgb_model.json')
 
 # Define the prediction function
 def predict(loan_amnt, term, grade, home_ownership, annual_inc,
-            verification_status, purpose, dti, open_acc): 
+            verification_status):
+            #purpose, dti, open_acc): 
             #revol_bal, revol_util, 
             #initial_list_status, application_type):
             #mort_acc, pub_rec_bankruptcies, time_paid_back, cr_line):
@@ -53,44 +54,19 @@ def predict(loan_amnt, term, grade, home_ownership, annual_inc,
     elif verification_status == 'Non verified':
         verification_status = 2
         
-        
-    if purpose == 'debt consolidation':
-        purpose = 0
-    elif purpose == 'credit card':
-        purpose = 1
-    elif purpose == 'home improvement':
-        purpose = 2
-    elif purpose == 'other':
-        purpose = 3
-    elif purpose == 'major purchase':
-        purpose = 4
-    elif purpose == 'car':
-        purpose = 5
-    elif purpose == 'vacation':
-        purpose = 6
-    elif purpose == 'moving':
-        purpose = 7
-    elif purpose == 'house':
-        purpose = 8
-    elif purpose == 'renewable energy':
-        purpose = 9
-    elif purpose == 'wedding':
-        purpose = 10
-    elif purpose == 'medical':
-        purpose = 11
-    elif purpose == 'small business':
-        purpose = 12
 
           
 
     prediction = model.predict(pd.DataFrame([[loan_amnt, term, grade, home_ownership, annual_inc,
-                                              verification_status, purpose, dti, open_acc]], 
+                                              verification_status]],
+                                              #purpose, dti, open_acc]], 
                                               #revol_bal, revol_util,
                                               #initial_list_status, application_type]],
                                               #mort_acc, pub_rec_bankruptcies, time_paid_back, cr_line]], 
             columns=['loan_amnt', 'term', 'grade', 
                       'home_ownership', 'annual_inc',
-                      'verification_status', 'purpose', 'dti, open_acc'])) 
+                      'verification_status']))
+                     #'purpose', 'dti, open_acc'])) 
                       #'revol_bal', 'revol_util', 
                       #'initial_list_status', 'application_type']))
                       #'mort_acc', 'pub_rec_bankruptcies', 'time_paid_back', 'cr_line']))
@@ -116,22 +92,22 @@ verification_status = st.selectbox('Verification Status:', ['Verified',
                                                             'Source verified', 
                                                             'Not Verified'])
 
-purpose = st.selectbox('Verification Status:', ['debt consolidation', 
-                                                'credit card',
-                                                'home improvement',
-                                                'other',
-                                                'major purchase',
-                                                'car',
-                                                'vacation',
-                                                'moving',
-                                                'house',
-                                                'renewable energy',
-                                                'wedding',
-                                                'medical',
-                                                'small business'])
+#purpose = st.selectbox('Verification Status:', ['debt consolidation', 
+                                                #'credit card',
+                                                #'home improvement',
+                                                #'other',
+                                                #'major purchase',
+                                                #'car',
+                                                #'vacation',
+                                                #'moving',
+                                                #'house',
+                                                #'renewable energy',
+                                                #'wedding',
+                                                #'medical',
+                                                #'small business'])
 
-dti = st.number_input('DTI:', min_value=0.1, max_value=10000000000000.0, value=1.0)
-open_acc = st.number_input('How many accounts are open:', min_value=0.1, max_value=10000000000000.0, value=1.0)
+#dti = st.number_input('DTI:', min_value=0.1, max_value=10000000000000.0, value=1.0)
+#open_acc = st.number_input('How many accounts are open:', min_value=0.1, max_value=10000000000000.0, value=1.0)
 
 #revol_bal = st.number_input('Total credit revolving balance:', min_value=0.1, max_value=10000000000000.0, value=1.0)
 #revol_util = st.number_input('Revolving line utilization rate', min_value=0.1, max_value=10000000000000.0, value=1.0)
@@ -146,8 +122,9 @@ open_acc = st.number_input('How many accounts are open:', min_value=0.1, max_val
 
 if st.button('Predict Outcome'):
     outcome = predict(loan_amnt, term, grade, home_ownership, annual_inc,
-                      verification_status, purpose, dti, open_acc)
+                      verification_status)
+                      #purpose, dti, open_acc)
                       #revol_bal, revol_util, initial_list_status, application_type) 
                       #mort_acc, pub_rec_bankruptcies, time_paid_back, cr_line)
     
-    st.success(f'The predicted outcome of the loan is ${outcome}')
+    st.success(f'The predicted outcome of the loan is {outcome}')
