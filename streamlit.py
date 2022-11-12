@@ -145,22 +145,22 @@ home_ownership = st.selectbox('Home Ownerhip:', ['Rent', 'Own', 'Mortgage'])
 annual_inc = st.number_input('Annual Income:', min_value=0.1, max_value=10000000000000.0, value=1.0)
 
 #verification_status = st.selectbox('Verification Status:', ['Verified', 
-                                                            'Source verified', 
-                                                            'Not Verified'])
+                                                            #'Source verified', 
+                                                            #'Not Verified'])
 
 #purpose = st.selectbox('Verification Status:', ['debt consolidation', 
-                                                'credit card',
-                                                'home improvement',
-                                                'other',
-                                                'major purchase',
-                                                'car',
-                                                'vacation',
-                                                'moving',
-                                                'house',
-                                                'renewable energy',
-                                                'wedding',
-                                                'medical',
-                                                'small business'])
+                                                #'credit card',
+                                                #'home improvement',
+                                                #'other',
+                                                #'major purchase',
+                                                #'car',
+                                                #'vacation',
+                                                #'moving',
+                                                #'house',
+                                                #'renewable energy',
+                                                #'wedding',
+                                                #'medical',
+                                                #'small business'])
 
 #dti = st.number_input('DTI:', min_value=0.1, max_value=10000000000000.0, value=1.0)
 #open_acc = st.number_input('How many accounts are open:', min_value=0.1, max_value=10000000000000.0, value=1.0)
