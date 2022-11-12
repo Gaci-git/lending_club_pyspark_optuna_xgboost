@@ -10,7 +10,7 @@ model.load_model('xgb_model.json')
 @st.cache(suppress_st_warning=True)
 
 # Define the prediction function
-def predict(loan_amnt, term, grade, home_ownership, annual_inc) 
+def predict(loan_amnt, term, grade, home_ownership, annual_inc):
             #verification_status, purpose, dti, open_acc, 
             #revol_bal, revol_util, 
             #initial_list_status, application_type,
