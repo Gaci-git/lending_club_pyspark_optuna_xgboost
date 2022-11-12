@@ -54,7 +54,7 @@ def predict(loan_amnt, term, grade, home_ownership, annual_inc,
     elif verification_status == 'Non verified':
         verification_status = 2
         
-   if application_type == 'Individual':
+    if application_type == 'Individual':
         application_type = 0
     elif application_type == 'Joint Application':
         application_type = 1
