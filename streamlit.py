@@ -10,16 +10,14 @@ st.markdown(
     """
     Streamlit is an open-source app framework built specifically for
     Machine Learning and Data Science projects.
-    **👈 Select a page from the sidebar** to see some examples
-    of what Streamlit can do!
-    ### Want to learn more?
-    - Check out [streamlit.io](https://streamlit.io)
-    - Jump into our [documentation](https://docs.streamlit.io)
-    - Ask a question in our [community
+    **👈 Select a page from the sidebar** to see Machine Learning models
+    for Loan Prediction!
+    ### Want kind of models this app contains?
+    - Loan Outcome prediction model
+    - Loan Grading prediction model
+    - Loan Sub-grading prediction model
         forums](https://discuss.streamlit.io)
-    ### See more complex demos
-    - Use a neural net to [analyze the Udacity Self-driving Car Image
-        Dataset](https://github.com/streamlit/demo-self-driving)
-    - Explore a [New York City rideshare dataset](https://github.com/streamlit/demo-uber-nyc-pickups)
+    ### See full code here:
+    - Git hub repository for [Loan_club](https://github.com/Gaci-git/loan_club)
 """
 )
