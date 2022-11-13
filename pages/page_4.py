@@ -201,11 +201,4 @@ def get_key(val):
  
     return "key doesn't exist"
 
-converted = get_key(outcome)
-st.write(f'Loan sub-grading: {converted}')
-
-            
-           
-            
-            
-
+st.success(f'Loan sub-grading: {get_key(outcome)}')
