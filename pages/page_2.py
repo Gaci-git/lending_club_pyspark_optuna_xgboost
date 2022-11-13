@@ -200,9 +200,9 @@ if st.button('Predict Outcome'):
                       mort_acc, pub_rec_bankruptcies, time_paid_back, cr_line)
     
 
-if int(outcome) == 1:
-            st.write("This loan will be paid off")
-else:
-            st.write("This loan will be charged off")
+            if outcome == 1:
+                        st.write("This loan will be paid off")
+            else:
+                        st.write("This loan will be charged off")
  
 
