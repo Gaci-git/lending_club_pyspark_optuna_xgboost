@@ -200,3 +200,8 @@ if st.button('Predict Outcome'):
                       mort_acc, pub_rec_bankruptcies, time_paid_back, cr_line)
     
     st.success(f'The predicted outcome of the loan is {outcome}')
+ 
+    if int(outcome) == 1:
+        st.write("This is a positive review with a probabiliy of ", probability)
+    else:
+        st.write("This is a negative review with a probabiliy of ", probability)
