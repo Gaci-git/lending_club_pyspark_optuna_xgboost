@@ -126,7 +126,7 @@ def predict(loan_amnt, term,
     return prediction
   
   
-st.title('Loan Outcome Prediction')
+st.title('Loan grading Prediction')
 #st.image(""".png""")
 st.header('Fill your request:')
 
@@ -184,4 +184,14 @@ if st.button('Predict Outcome'):
                       revol_bal, revol_util, initial_list_status, application_type,
                       mort_acc, pub_rec_bankruptcies, time_paid_back, cr_line)
     
-    st.success(f'The predicted grade of the loan is {outcome}')
+my_dict = {'A': 0, 'B': 1, 'C': 2, 'D': 3, 'E': 4, 'F': 5, 'G': 6}        
+            
+def get_key(val):
+    for key, value in my_dict.items():
+        if val == value:
+            return key
+ 
+    return "key doesn't exist"
+
+converted = get_key(outcome)
+st.write(f'Loan grading: {converted}')
