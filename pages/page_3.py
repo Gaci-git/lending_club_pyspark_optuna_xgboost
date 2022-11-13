@@ -126,7 +126,7 @@ def predict(loan_amnt, term,
     return prediction
   
   
-st.title('Loan grading Prediction')
+st.title('Loan Grading Prediction')
 #st.image(""".png""")
 st.header('Fill your request:')
 
