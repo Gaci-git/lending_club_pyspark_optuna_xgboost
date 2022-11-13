@@ -201,8 +201,8 @@ if st.button('Predict Outcome'):
     
 
 if int(outcome) == 1:
-            st.subheader("This loan will be paid off")
+            st.write("This loan will be paid off")
 else:
-            st.subheader("This loan will be charged off")
+            st.write("This loan will be charged off")
  
 
