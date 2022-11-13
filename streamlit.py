@@ -4,7 +4,6 @@ st.set_page_config(
     page_icon="👋",
 )
 
-st.sidebar.title('Home')
 st.write("# Welcome to Loan Prediction Project with XGBoost ")
 
 st.markdown(
