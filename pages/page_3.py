@@ -194,4 +194,4 @@ def get_key(val):
     return "key doesn't exist"
 
 converted = get_key(int(outcome))
-st.write(f'Loan grading: {converted}')
+st.success(f'Loan grading: {converted}')
