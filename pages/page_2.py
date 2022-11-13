@@ -204,7 +204,7 @@ if outcome == 1:
 else:
             result = 'Charged Off'
 
-st.success('Your loan is {}'.format(result))
+st.success('Loan Outcome is {}'.format(result))
 
 
 
