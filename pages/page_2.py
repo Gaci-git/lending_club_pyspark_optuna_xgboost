@@ -199,12 +199,12 @@ if st.button('Predict Outcome'):
                       revol_bal, revol_util, initial_list_status, application_type,
                       mort_acc, pub_rec_bankruptcies, time_paid_back, cr_line)
             
-            if outcome == 1:
-                        result = 'Fully Paid'
-            else:
-                        result = 'Charged Off'
-            
-            st.success('Your loan is {}'.format(result))
-    
+if outcome == 1:
+            result = 'Fully Paid'
+else:
+            result = 'Charged Off'
+
+st.success('Your loan is {}'.format(result))
+
 
 
