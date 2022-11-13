@@ -126,7 +126,7 @@ def predict(loan_amnt, term,
     return prediction
   
   
-st.title('Loan Outcome Prediction')
+st.title('Loan Sub-grading Prediction')
 #st.image(""".png""")
 st.header('Fill your request:')
 
@@ -202,7 +202,7 @@ def get_key(val):
     return "key doesn't exist"
 
 converted = get_key(outcome)
-st.write(f'Loan grading: {converted}')
+st.write(f'Loan sub-grading: {converted}')
 
             
            
