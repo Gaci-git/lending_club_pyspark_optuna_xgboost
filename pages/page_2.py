@@ -202,6 +202,6 @@ if st.button('Predict Outcome'):
     st.success(f'The predicted outcome of the loan is {outcome}')
  
     if int(outcome) == 1:
-        st.write("This is a positive review with a probabiliy of ", probability)
+        st.write("This loan will be paid off")
     else:
-        st.write("This is a negative review with a probabiliy of ", probability)
+        st.write("This loan will be charged off")
