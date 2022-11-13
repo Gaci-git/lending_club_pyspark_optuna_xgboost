@@ -199,10 +199,10 @@ if st.button('Predict Outcome'):
                       revol_bal, revol_util, initial_list_status, application_type,
                       mort_acc, pub_rec_bankruptcies, time_paid_back, cr_line)
     
-    st.success(
-                if int(outcome) == 1:
-                    st.write("This loan will be paid off")
-                else:
-                    st.write("This loan will be charged off")))
+
+if int(outcome) == 1:
+            st.write("This loan will be paid off")
+else:
+            st.write("This loan will be charged off")))
  
 
