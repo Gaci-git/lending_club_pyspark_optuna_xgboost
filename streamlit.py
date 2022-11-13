@@ -7,8 +7,6 @@ st.set_page_config(
 st.sidebar.title('Home')
 st.write("# Welcome to Loan Prediction Project with XGBoost ")
 
-#st.image(""".png""")
-
 st.markdown(
     """
     Streamlit is an open-source app framework built specifically for
