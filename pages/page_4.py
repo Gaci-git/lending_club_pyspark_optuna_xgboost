@@ -184,4 +184,28 @@ if st.button('Predict Outcome'):
                       revol_bal, revol_util, initial_list_status, application_type,
                       mort_acc, pub_rec_bankruptcies, time_paid_back, cr_line)
     
-    st.success(f'The predicted grade of the loan is {outcome}')
+
+            
+my_dict = {'A1': 0, 'A2' : 1, 'A3': 2, 'A4': 3, 'A5': 4,
+           'B1': 5, 'B2' : 6, 'B3': 7, 'B4': 8, 'B5': 9,
+           'C1': 10, 'C2' : 11, 'C3': 12, 'C4': 13, 'C5': 14,
+           'D1': 15, 'D2' : 16, 'D3': 17, 'D4': 18, 'D5': 19,
+           'E1': 20, 'E2' : 21, 'E3': 22, 'E4': 23, 'E5': 24,
+           'F1': 25, 'F2' : 26, 'F3': 27, 'F4': 28, 'F5': 29,
+           'G1': 30, 'G2' : 31, 'G3': 32, 'G4': 33, 'G5': 34}         
+            
+def get_key(val):
+    for key, value in my_dict.items():
+        if val == value:
+            return key
+ 
+    return "key doesn't exist"
+
+converted = get_key(outcome)
+st.write(f'Loan grading: {converted})
+
+            
+           
+            
+            
+
