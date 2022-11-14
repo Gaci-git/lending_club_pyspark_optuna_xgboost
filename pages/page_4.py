@@ -5,7 +5,7 @@ import numpy as np
 @st.cache(suppress_st_warning=True)
 
 
-model = loaded_model = tf.keras.models.load_model('my_model')
+model = tf.keras.models.load_model('my_model')
 
 # Define the prediction function
 def predict(loan_amnt, term,
