@@ -5,7 +5,7 @@ import numpy as np
 @st.cache(suppress_st_warning=True)
 
 
-model = keras.models.load_model('sub_grade_model.h5')
+model = tf.keras.models.load_model('tf_model')
 
 # Define the prediction function
 def predict(loan_amnt, term,
