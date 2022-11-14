@@ -1,13 +1,11 @@
-import xgboost as xgb
 import streamlit as st
-import pandas as pd
-import sklearn
+import tensorflow as tf
+import numpy as np
 
-model = xgb.XGBClassifier()
-model.load_model('xgb_model_sub_grade_optuna.json')
-
-#Caching the model for faster loading
 @st.cache(suppress_st_warning=True)
+
+
+model = loaded_model = tf.keras.models.load_model('my_model')
 
 # Define the prediction function
 def predict(loan_amnt, term,
@@ -25,8 +23,6 @@ def predict(loan_amnt, term,
         term = 0
     elif term == '60 months':
         term = 1
-
-  
 
     if emp_length == 'less than 1 year':
          emp_length = 0
