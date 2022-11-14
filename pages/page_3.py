@@ -173,17 +173,6 @@ pub_rec_bankruptcies = st.number_input('Reported Bankruptcies:', min_value=0.1, 
 time_paid_back = st.number_input('How long customer will take to repay:', min_value=0.1, max_value=10000000000000.0, value=1.0)
 cr_line = st.number_input('For many years Credit Line was open:', min_value=0.1, max_value=10000000000000.0, value=1.0)
 
-
-if st.button('Predict Outcome'):
-    outcome = predict(loan_amnt, term,  
-                      emp_length,
-                      home_ownership, annual_inc,
-                      verification_status,
-                      purpose, 
-                      dti, open_acc,
-                      revol_bal, revol_util, initial_list_status, application_type,
-                      mort_acc, pub_rec_bankruptcies, time_paid_back, cr_line)
-    
 my_dict = {'A': 0, 'B': 1, 'C': 2, 'D': 3, 'E': 4, 'F': 5, 'G': 6}        
             
 def get_key(val):
@@ -193,4 +182,18 @@ def get_key(val):
  
     return "key doesn't exist"
 
-st.success(f'Loan grading: {get_key(outcome)}')
+if st.button('Predict Outcome'):
+            outcome = predict(loan_amnt, term,  
+                      emp_length,
+                      home_ownership, annual_inc,
+                      verification_status,
+                      purpose, 
+                      dti, open_acc,
+                      revol_bal, revol_util, initial_list_status, application_type,
+                      mort_acc, pub_rec_bankruptcies, time_paid_back, cr_line)
+            st.success(f'Loan grading: {get_key(outcome)}')
+
+    
+
+
+
