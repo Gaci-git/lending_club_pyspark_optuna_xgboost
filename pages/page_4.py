@@ -6,7 +6,7 @@ import numpy as np
 import joblib
 
 
-model = pickle.joblib.load('xgb_model_sub_grade.pkl')
+model = joblib.load('xgb_model_sub_grade.pkl')
 
 @st.cache(suppress_st_warning=True)
 
