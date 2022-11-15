@@ -9,7 +9,7 @@ import numpy as np
 @st.cache(suppress_st_warning=True)
 
 
-model = tf.keras.models.load_model('tf_model')
+model = keras.models.load_model('tf_model')
 
 # Define the prediction function
 def predict(loan_amnt, term,
