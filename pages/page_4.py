@@ -2,10 +2,11 @@ import streamlit as st
 import xgboost as xgb
 import pandas as pd
 import sklearn
-import pickle
 import numpy as np
+import joblib
 
-model = pickle.load(open('xgb_model_sub_grade.pkl','rb'))
+
+model = pickle.joblib.load('xgb_model_sub_grade.pkl')
 
 @st.cache(suppress_st_warning=True)
 
