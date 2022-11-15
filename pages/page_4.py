@@ -5,7 +5,7 @@ import sklearn
 import pickle
 import numpy as np
 
-model = pickle.load(open('xgb_model_sub_grade.pkl','rb')
+model = pickle.load(open('xgb_model_sub_grade.pkl','rb'))
 
 @st.cache(suppress_st_warning=True)
 
