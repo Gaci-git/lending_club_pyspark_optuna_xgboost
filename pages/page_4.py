@@ -1,10 +1,7 @@
 import streamlit as st
-import tensorflow as tf
-
-from tensorflow import keras 
-from tensorflow.keras import layers
-from tensorflow.keras.models import Sequential
+import pickle
 import numpy as np
+model = pickle.load(open('xgb_model_sub_grade.pkl','rb')
 
 @st.cache(suppress_st_warning=True)
 
