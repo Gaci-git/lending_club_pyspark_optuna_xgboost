@@ -1,6 +1,11 @@
 import streamlit as st
+import xgboost as xgb
+import streamlit as st
+import pandas as pd
+import sklearn
 import pickle
 import numpy as np
+
 model = pickle.load(open('xgb_model_sub_grade.pkl','rb')
 
 @st.cache(suppress_st_warning=True)
@@ -16,6 +21,7 @@ def predict(loan_amnt, term,
             revol_bal, revol_util, 
             initial_list_status, application_type,
             mort_acc, pub_rec_bankruptcies, time_paid_back, cr_line):
+                    
   
     if term == '36 months':
         term = 0
