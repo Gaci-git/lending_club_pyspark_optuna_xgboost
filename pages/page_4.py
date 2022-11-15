@@ -10,10 +10,8 @@ model = pickle.load(open('xgb_model_sub_grade.pkl','rb')
 @st.cache(suppress_st_warning=True)
 
 # Define the prediction function
-def predict(loan_amnt, term,emp_length, home_ownership, annual_inc, verification_status, purpose, dti, open_acc, revol_bal, revol_util, initial_list_status, application_type, mort_acc, 
-            pub_rec_bankruptcies, time_paid_back, cr_line):
-                    
-  
+def predict(loan_amnt, term,emp_length, home_ownership, annual_inc, verification_status, purpose, dti, open_acc, revol_bal, revol_util, initial_list_status, application_type, mort_acc, pub_rec_bankruptcies, time_paid_back, cr_line):        
+
     if term == '36 months':
         term = 0
     elif term == '60 months':
