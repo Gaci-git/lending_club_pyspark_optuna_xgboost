@@ -288,7 +288,7 @@ if st.button('Predict Outcome'):
             else:
                         result = 'Charged Off'
 
-            st.success('Loan Outcome is {}'.format(result))
+            st.success('Loan Outcome is: {}'.format(result))
 
 
 
