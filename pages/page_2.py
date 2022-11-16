@@ -10,7 +10,8 @@ model.load_model('xgb_model_optuna.json')
 @st.cache(suppress_st_warning=True)
 
 # Define the prediction function
-def predict(loan_amnt, term, grade, 
+def predict(loan_amnt, term, int_rate,
+            grade, sub_grade,
             emp_length,
             home_ownership, annual_inc,
             verification_status,
@@ -41,6 +42,77 @@ def predict(loan_amnt, term, grade,
         grade = 6
     elif grade == 'G':
         grade = 7
+
+    if sub_grade == 'A1':
+        sub_grade = 0
+    elif sub_grade == 'A2':
+        sub_grade = 1
+    elif sub_grade == 'A3':
+        sub_grade = 2
+    elif sub_grade == 'A4':
+        sub_grade = 3
+    elif sub_grade == 'A5':
+        sub_grade = 4
+    elif sub_grade == 'B1':
+        sub_grade = 5
+    elif sub_grade == 'B2':
+        sub_grade = 6
+    elif sub_grade == 'B3':
+        sub_grade = 7
+    elif sub_grade == 'B4':
+        sub_grade = 8
+    elif sub_grade == 'B5':
+        sub_grade = 9
+    elif sub_grade == 'C1':
+        sub_grade = 10
+    elif sub_grade == 'C2':
+        sub_grade = 11
+    elif sub_grade == 'C3':
+        sub_grade = 12
+    elif sub_grade == 'C4':
+        sub_grade = 13
+    elif sub_grade == 'C5':
+        sub_grade = 14
+    elif sub_grade == 'D1':
+        sub_grade = 15
+    elif sub_grade == 'D2':
+        sub_grade = 16
+    elif sub_grade == 'D3':
+        sub_grade = 17
+    elif sub_grade == 'D4':
+        sub_grade = 18
+    elif sub_grade == 'D5':
+        sub_grade = 19
+    elif sub_grade == 'E1':
+        sub_grade = 20
+    elif sub_grade == 'E2':
+        sub_grade = 21
+    elif sub_grade == 'E3':
+        sub_grade = 22
+    elif sub_grade == 'E4':
+        sub_grade = 23
+    elif sub_grade == 'E5':
+        sub_grade = 24
+    elif sub_grade == 'F1':
+        sub_grade = 25
+    elif sub_grade == 'F2':
+        sub_grade = 26
+    elif sub_grade == 'F3':
+        sub_grade = 27
+    elif sub_grade == 'F4':
+        sub_grade = 28
+    elif sub_grade == 'F5':
+        sub_grade = 29
+    elif sub_grade == 'G1':
+        sub_grade = 30
+    elif sub_grade == 'G2':
+        sub_grade = 31
+    elif sub_grade == 'G3':
+        sub_grade = 32
+    elif sub_grade == 'G4':
+        sub_grade = 33
+    elif sub_grade == 'G5':
+        sub_grade = 34
 
     if emp_length == 'less than 1 year':
          emp_length = 0
@@ -117,7 +189,8 @@ def predict(loan_amnt, term, grade,
         initial_list_status = 1
           
 
-    prediction = model.predict(pd.DataFrame([[loan_amnt, term, grade, 
+    prediction = model.predict(pd.DataFrame([[loan_amnt, term, int_rate,
+                                              grade, sub_grade,
                                               emp_length,
                                               home_ownership, annual_inc,
                                               verification_status,
@@ -128,7 +201,8 @@ def predict(loan_amnt, term, grade,
                                               initial_list_status, application_type,
                                               mort_acc, pub_rec_bankruptcies, time_paid_back, cr_line]], 
                                             
-            columns=['loan_amnt', 'term', 'grade', 
+            columns=['loan_amnt', 'term', 'int_rate',
+                     'grade', 'sub_grade',
                      'emp_length',
                      'home_ownership', 'annual_inc',
                      'verification_status',
@@ -146,7 +220,16 @@ st.header('Fill your request:')
 
 loan_amnt = st.number_input('Loan amount:', min_value=0.1, max_value=100000000000000.0, value=1.0)
 term = st.selectbox('Term:', ['36 months', '60 months'])
+int_rate = st.number_input('Interest rate:', min_value=0.1, max_value=100000000000000.0, value=1.0)
+
 grade = st.selectbox('Grade Rating:', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+sub_grade = st.selectbox('Grade Rating:', ['A1', 'A2', 'A3', 'A4', 'A5', 
+                                           'B1', 'B2', 'B3', 'B4', 'B5', 
+                                           'C1', 'C2', 'C3', 'C4', 'C5', 
+                                           'D1', 'D2', 'D3', 'D4', 'D5',
+                                           'E1', 'E2', 'E3', 'E4', 'E5',
+                                           'F1', 'F2', 'F3', 'F4', 'F5',
+                                           'G1', 'G2', 'G3', 'G4', 'G5'])
 
 emp_length = st.selectbox('Employment Length:', ['less than 1 year', '1 year', '2 years', '3 years', '4 years', '5 years', '6 years', '7 years', '8 years', '9 years', '10 years or more'])
 
@@ -190,14 +273,15 @@ cr_line = st.number_input('For many years Credit Line was open:', min_value=0.1,
 
 
 if st.button('Predict Outcome'):
-            outcome = predict(loan_amnt, term, grade, 
-                      emp_length,
-                      home_ownership, annual_inc,
-                      verification_status,
-                      purpose, 
-                      dti, open_acc,
-                      revol_bal, revol_util, initial_list_status, application_type,
-                      mort_acc, pub_rec_bankruptcies, time_paid_back, cr_line)
+            outcome = predict(loan_amnt, term, int_rate,
+                              grade, sub_grade,
+                              emp_length,
+                              home_ownership, annual_inc,
+                              verification_status,
+                              purpose, 
+                              dti, open_acc,
+                              revol_bal, revol_util, initial_list_status, application_type,
+                              mort_acc, pub_rec_bankruptcies, time_paid_back, cr_line)
             
             if outcome == 1:
                         result = 'Fully Paid'
