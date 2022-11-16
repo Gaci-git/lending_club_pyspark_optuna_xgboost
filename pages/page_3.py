@@ -10,7 +10,7 @@ model.load_model('xgb_model_grade_optuna.json')
 @st.cache(suppress_st_warning=True)
 
 # Define the prediction function
-def predict(loan_amnt, term,
+def predict(loan_amnt, term, int_rate,
             emp_length,
             home_ownership, annual_inc,
             verification_status,
@@ -103,7 +103,7 @@ def predict(loan_amnt, term,
         initial_list_status = 1
           
 
-    prediction = model.predict(pd.DataFrame([[loan_amnt, term,  
+    prediction = model.predict(pd.DataFrame([[loan_amnt, term, int_rate, 
                                               emp_length,
                                               home_ownership, annual_inc,
                                               verification_status,
@@ -114,7 +114,7 @@ def predict(loan_amnt, term,
                                               initial_list_status, application_type,
                                               mort_acc, pub_rec_bankruptcies, time_paid_back, cr_line]], 
                                             
-            columns=['loan_amnt', 'term',
+            columns=['loan_amnt', 'term', 'int_rate',
                      'emp_length',
                      'home_ownership', 'annual_inc',
                      'verification_status',
@@ -132,6 +132,7 @@ st.header('Fill your request:')
 
 loan_amnt = st.number_input('Loan amount:', min_value=0.1, max_value=100000000000000.0, value=1.0)
 term = st.selectbox('Term:', ['36 months', '60 months'])
+int_rate = st.number_input('Interest rate:', min_value=0.1, max_value=100000000000000.0, value=1.0)
 
 emp_length = st.selectbox('Employment Length:', ['less than 1 year', '1 year', '2 years', '3 years', '4 years', '5 years', '6 years', '7 years', '8 years', '9 years', '10 years or more'])
 
@@ -183,7 +184,7 @@ def get_key(val):
     return "key doesn't exist"
 
 if st.button('Predict Outcome'):
-            outcome = predict(loan_amnt, term,  
+            outcome = predict(loan_amnt, term, int_rate,
                       emp_length,
                       home_ownership, annual_inc,
                       verification_status,
