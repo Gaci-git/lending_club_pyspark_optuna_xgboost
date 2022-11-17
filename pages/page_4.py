@@ -15,7 +15,7 @@ with open('HGBR_sub_grade.pkl', 'rb') as f:
 @st.cache(suppress_st_warning=True)
 
 # Define the prediction function
-def predict(loan_amnt, term,emp_length, home_ownership, annual_inc, verification_status, purpose, dti, open_acc, revol_bal, revol_util, initial_list_status, application_type, mort_acc, pub_rec_bankruptcies, time_paid_back, cr_line):        
+def predict(loan_amnt, term, emp_length, home_ownership, annual_inc, verification_status, purpose, dti, open_acc, revol_bal, revol_util, initial_list_status, application_type, mort_acc, pub_rec_bankruptcies, time_paid_back, cr_line):        
 
     if term == '36 months':
         term = 0
@@ -195,4 +195,4 @@ def get_key(val):
  
     return "key doesn't exist"
 
-st.success(f'Loan sub-grading: {get_key(outcome)}')
+st.success(f'Loan sub-grading: {outcome}')
