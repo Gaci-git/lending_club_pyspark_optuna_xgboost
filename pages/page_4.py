@@ -193,4 +193,6 @@ if st.button('Predict Outcome'):
                       revol_bal, revol_util, initial_list_status, application_type,
                       mort_acc, pub_rec_bankruptcies, time_paid_back, cr_line)
 
-    st.success(f'Loan sub-grading: {outcome.tolist()}')
+    outcome = outcome.tolist()
+
+    st.success(f'Loan sub-grading: {outcome}')
