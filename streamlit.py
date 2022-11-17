@@ -19,6 +19,7 @@ st.markdown(
     - Loan Sub-grading prediction model
 
     ### See full code here:
+    - Google Colab [notebook] (https://colab.research.google.com/drive/1brRQMUM7SAXfF8Jf7eo8CskFXJ5nDBG2?usp=sharing)
     - Git hub repository for [Loan_club](https://github.com/Gaci-git/loan_club)
 """
 )
