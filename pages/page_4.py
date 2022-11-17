@@ -183,6 +183,20 @@ time_paid_back = st.number_input('How long customer will take to repay:', min_va
 cr_line = st.number_input('For many years Credit Line was open:', min_value=0.1, max_value=10000000000000.0, value=1.0)
 
 
+my_dict = {'A1': 0, 'A2' : 1, 'A3': 2, 'A4': 3, 'A5': 4,
+           'B1': 5, 'B2' : 6, 'B3': 7, 'B4': 8, 'B5': 9,
+           'C1': 10, 'C2' : 11, 'C3': 12, 'C4': 13, 'C5': 14,
+           'D1': 15, 'D2' : 16, 'D3': 17, 'D4': 18, 'D5': 19,
+           'E1': 20, 'E2' : 21, 'E3': 22, 'E4': 23, 'E5': 24,
+           'F1': 25, 'F2' : 26, 'F3': 27, 'F4': 28, 'F5': 29,
+           'G1': 30, 'G2' : 31, 'G3': 32, 'G4': 33, 'G5': 34}         
+            
+def get_key(val):
+    for key, value in my_dict.items():
+        if val == value:
+            return key
+    return "key doesn't exist"
+
 if st.button('Predict Outcome'):
     outcome = predict(loan_amnt, term,  
                       grade, emp_length,
@@ -194,5 +208,8 @@ if st.button('Predict Outcome'):
                       mort_acc, pub_rec_bankruptcies, time_paid_back, cr_line)
 
     outcome = outcome.tolist()
+    grade = outcome[0]
+    int_rate = outcome[-1]
+    
 
-    st.success(f'Loan sub-grading: {outcome}')
+    st.success(f'Loan sub-grading: {get_key(grade), int_rate}')
