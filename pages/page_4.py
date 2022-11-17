@@ -5,7 +5,7 @@ import numpy as np
 import sklearn
 from sklearn import ensemble
 from sklearn.multioutput import MultiOutputRegressor
-from sklearn.ensemble import HistGradientBoostingClassifier
+from sklearn.ensemble import HistGradientBoostingRegressor
 
 
 
