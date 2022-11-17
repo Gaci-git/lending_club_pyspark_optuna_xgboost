@@ -15,12 +15,27 @@ with open('HGBR_sub_grade.pkl', 'rb') as f:
 @st.cache(suppress_st_warning=True)
 
 # Define the prediction function
-def predict(loan_amnt, term, emp_length, home_ownership, annual_inc, verification_status, purpose, dti, open_acc, revol_bal, revol_util, initial_list_status, application_type, mort_acc, pub_rec_bankruptcies, time_paid_back, cr_line):        
+def predict(loan_amnt, term, grade, emp_length, home_ownership, annual_inc, verification_status, purpose, dti, open_acc, revol_bal, revol_util, initial_list_status, application_type, mort_acc, pub_rec_bankruptcies, time_paid_back, cr_line):        
 
     if term == '36 months':
         term = 0
     elif term == '60 months':
         term = 1
+        
+    if grade == 'A':
+        grade = 1
+    elif grade == 'B':
+        grade = 2
+    elif grade == 'C':
+        grade = 3
+    elif grade == 'D':
+        grade = 4
+    elif grade == 'E':
+        grade = 5
+    elif grade == 'F':
+        grade = 6
+    elif grade == 'G':
+        grade = 7
 
     if emp_length == 'less than 1 year':
          emp_length = 0
@@ -98,7 +113,7 @@ def predict(loan_amnt, term, emp_length, home_ownership, annual_inc, verificatio
           
 
     prediction = model.predict(pd.DataFrame([[loan_amnt, term,  
-                                              emp_length,
+                                              grade, emp_length,
                                               home_ownership, annual_inc,
                                               verification_status,
                                               purpose, 
@@ -109,7 +124,7 @@ def predict(loan_amnt, term, emp_length, home_ownership, annual_inc, verificatio
                                               mort_acc, pub_rec_bankruptcies, time_paid_back, cr_line]], 
                                             
             columns=['loan_amnt', 'term',
-                     'emp_length',
+                     'grade', 'emp_length',
                      'home_ownership', 'annual_inc',
                      'verification_status',
                      'purpose',
@@ -126,7 +141,7 @@ st.header('Fill your request:')
 
 loan_amnt = st.number_input('Loan amount:', min_value=0.1, max_value=100000000000000.0, value=1.0)
 term = st.selectbox('Term:', ['36 months', '60 months'])
-
+grade = st.selectbox('Grade Rating:', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
 emp_length = st.selectbox('Employment Length:', ['less than 1 year', '1 year', '2 years', '3 years', '4 years', '5 years', '6 years', '7 years', '8 years', '9 years', '10 years or more'])
 
 
@@ -170,29 +185,14 @@ cr_line = st.number_input('For many years Credit Line was open:', min_value=0.1,
 
 if st.button('Predict Outcome'):
     outcome = predict(loan_amnt, term,  
-                      emp_length,
+                      grade, emp_length,
                       home_ownership, annual_inc,
                       verification_status,
                       purpose, 
                       dti, open_acc,
                       revol_bal, revol_util, initial_list_status, application_type,
                       mort_acc, pub_rec_bankruptcies, time_paid_back, cr_line)
+        
     
 
-            
-my_dict = {'A1': 0, 'A2' : 1, 'A3': 2, 'A4': 3, 'A5': 4,
-           'B1': 5, 'B2' : 6, 'B3': 7, 'B4': 8, 'B5': 9,
-           'C1': 10, 'C2' : 11, 'C3': 12, 'C4': 13, 'C5': 14,
-           'D1': 15, 'D2' : 16, 'D3': 17, 'D4': 18, 'D5': 19,
-           'E1': 20, 'E2' : 21, 'E3': 22, 'E4': 23, 'E5': 24,
-           'F1': 25, 'F2' : 26, 'F3': 27, 'F4': 28, 'F5': 29,
-           'G1': 30, 'G2' : 31, 'G3': 32, 'G4': 33, 'G5': 34}         
-            
-def get_key(val):
-    for key, value in my_dict.items():
-        if val == value:
-            return key
- 
-    return "key doesn't exist"
-
-st.success(f'Loan sub-grading: {outcome}')
+        st.success(f'Loan sub-grading: {outcome}')
