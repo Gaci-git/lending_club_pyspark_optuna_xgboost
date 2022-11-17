@@ -209,9 +209,9 @@ if st.button('Predict Outcome'):
 
     outcome = outcome.tolist() # outcome returned object [[ float float]]
     unwrap = outcome[0] # taking first item from list of list
-    grade = int(unwrap[0])
+    grade = int(unwrap[0]) #converting float to int in order to match with my_dict
     int_rate = unwrap[-1]
     
 #get_key(grade), int_rate
 
-    st.success(f'Loan sub-grading: {grade}')
+    st.success(f'Loan sub-grading: {get_key(grade), int_rate}')
