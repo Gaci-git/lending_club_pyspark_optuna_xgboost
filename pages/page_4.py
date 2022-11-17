@@ -211,5 +211,6 @@ if st.button('Predict Outcome'):
     grade = outcome[0]
     int_rate = outcome[-1]
     
+#get_key(grade), int_rate
 
-    st.success(f'Loan sub-grading: {get_key(grade), int_rate}')
+    st.success(f'Loan sub-grading: {outcome}')
