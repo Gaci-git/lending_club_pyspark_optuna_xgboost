@@ -1,12 +1,16 @@
 import streamlit as st
-import xgboost as xgb
+import pickle
 import pandas as pd
-import sklearn
 import numpy as np
-import joblib
+import sklearn
+from sklearn import ensemble
+from sklearn.multioutput import MultiOutputRegressor
+from sklearn.ensemble import HistGradientBoostingClassifier
 
 
-model = joblib.load('xgb_model_sub_grade.pkl')
+
+with open(''HGBR_sub_grade.pkl', 'rb') as f:
+        model = pickle.load(f)
 
 @st.cache(suppress_st_warning=True)
 
