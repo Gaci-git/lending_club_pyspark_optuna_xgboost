@@ -9,7 +9,7 @@ from sklearn.ensemble import HistGradientBoostingClassifier
 
 
 
-with open('HGBR_sub_grade.pkl', 'rb') as f:
+with open('sub_grade.sav', 'rb') as f:
         model = pickle.load(f)
 
 @st.cache(suppress_st_warning=True)
