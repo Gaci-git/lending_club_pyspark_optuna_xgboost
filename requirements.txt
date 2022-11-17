@@ -1,6 +1,5 @@
 xgboost
 sklearn == 1.0.2
-keras
 numpy
 pandas
 scikit-learn
