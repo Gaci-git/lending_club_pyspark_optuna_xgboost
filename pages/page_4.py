@@ -208,8 +208,9 @@ if st.button('Predict Outcome'):
                       mort_acc, pub_rec_bankruptcies, time_paid_back, cr_line)
 
     outcome = outcome.tolist()
-    grade = outcome[0]
-    int_rate = outcome[-1]
+    unwrap = outcome[0]
+    grade = unwrap[0]
+    int_rate = unwrap[-1]
     
 #get_key(grade), int_rate
 
