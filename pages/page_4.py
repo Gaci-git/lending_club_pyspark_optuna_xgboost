@@ -207,9 +207,9 @@ if st.button('Predict Outcome'):
                       revol_bal, revol_util, initial_list_status, application_type,
                       mort_acc, pub_rec_bankruptcies, time_paid_back, cr_line)
 
-    outcome = outcome.tolist()
-    unwrap = outcome[0]
-    grade = unwrap[0]
+    outcome = outcome.tolist() # outcome returned object [[ float float]]
+    unwrap = outcome[0] # taking first item from list of list
+    grade = int(unwrap[0])
     int_rate = unwrap[-1]
     
 #get_key(grade), int_rate
