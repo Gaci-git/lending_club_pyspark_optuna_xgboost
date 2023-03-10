@@ -1,4 +1,4 @@
-# Loan outcome prediction with XGBoost and Multi-Output HistGradientBoostingRegressor
+# Loan outcome prediction with XGBoost
 
 Being able to accurately assess the risk of a loan application can save a lender the cost of holding too many risky assets.
 Without having a credit score or credit history we will try to predict how profitable a loan will be compared to our loans database, accumulated over the years.
